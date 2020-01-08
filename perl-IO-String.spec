@@ -4,14 +4,15 @@
 #
 Name     : perl-IO-String
 Version  : 1.08
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/G/GA/GAAS/IO-String-1.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/G/GA/GAAS/IO-String-1.08.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libio-handle-util-perl/libio-handle-util-perl_0.01-2.debian.tar.xz
-Summary  : IO::File interface for in-core strings
+Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Artistic-1.0 GPL-1.0
 Requires: perl-IO-String-license = %{version}-%{release}
+Requires: perl-IO-String-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 
 %description
@@ -38,18 +39,28 @@ Group: Default
 license components for the perl-IO-String package.
 
 
+%package perl
+Summary: perl components for the perl-IO-String package.
+Group: Default
+Requires: perl-IO-String = %{version}-%{release}
+
+%description perl
+perl components for the perl-IO-String package.
+
+
 %prep
 %setup -q -n IO-String-1.08
-cd ..
-%setup -q -T -D -n IO-String-1.08 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libio-handle-util-perl_0.01-2.debian.tar.xz
+cd %{_builddir}/IO-String-1.08
 mkdir -p deblicense/
-cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/IO-String-1.08/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/IO-String-1.08/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -59,7 +70,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
@@ -68,7 +79,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-IO-String
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-IO-String/deblicense_copyright
+cp %{_builddir}/IO-String-1.08/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-IO-String/c7cbead4fc445ef2748335e1d1a81a21d992aad2
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -81,7 +92,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/IO/String.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -89,4 +99,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-IO-String/deblicense_copyright
+/usr/share/package-licenses/perl-IO-String/c7cbead4fc445ef2748335e1d1a81a21d992aad2
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/IO/String.pm
