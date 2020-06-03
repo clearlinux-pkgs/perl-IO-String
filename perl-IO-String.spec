@@ -4,7 +4,7 @@
 #
 Name     : perl-IO-String
 Version  : 1.08
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/G/GA/GAAS/IO-String-1.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/G/GA/GAAS/IO-String-1.08.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libio-handle-util-perl/libio-handle-util-perl_0.01-2.debian.tar.xz
@@ -103,4 +103,4 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.2/IO/String.pm
+/usr/lib/perl5/vendor_perl/5.30.3/IO/String.pm
