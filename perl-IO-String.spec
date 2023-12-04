@@ -4,7 +4,7 @@
 #
 Name     : perl-IO-String
 Version  : 1.08
-Release  : 25
+Release  : 26
 URL      : https://cpan.metacpan.org/authors/id/G/GA/GAAS/IO-String-1.08.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/G/GA/GAAS/IO-String-1.08.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libi/libio-handle-util-perl/libio-handle-util-perl_0.01-2.debian.tar.xz
